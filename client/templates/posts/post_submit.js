@@ -29,13 +29,13 @@ Template.postSubmit.events({
     Meteor.call('postInsert', post, function(error, result) {
       // display the error to the user and abort
       if (error) {
-        throwError(error.reason);
+        Errors.throw(error.reason);
         return;
       }
       
       // show this result but route anyway
       if (result.postExists) {
-        throwError('This link has already been posted');
+        Errors.throw('This link has already been posted');
       }
       
       Router.go('postPage', {_id: result._id});  

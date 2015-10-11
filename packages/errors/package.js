@@ -12,3 +12,9 @@ Package.onUse(function(api) {
   api.addFiles(['errors.js', 'errors_list.html', 'errors_list.js'], 'client');
   api.export('Errors');
 });
+
+Package.onTest(function(api) {
+  api.use('pkaushik:errors', 'client');
+  api.use(['tinytest', 'test-helpers', 'templating'], 'client');  
+  api.addFiles('errors_tests.js', 'client');
+});
