@@ -14,6 +14,7 @@ Template.commentSubmit.helpers({
 Template.commentSubmit.events({
   'submit form': function(e, template) {
     e.preventDefault();
+    Session.set('commentSubmitErrors', {});
 
     var $body = $(e.target).find('[name=body]');
     var comment = {
@@ -24,7 +25,8 @@ Template.commentSubmit.events({
     var errors = {};
     if (! comment.body) {
       errors.body = 'Please write some content';
-      return Session.set('commentSubmitErrors', errors);
+      Session.set('commentSubmitErrors', errors);
+      return;
     }
 
     Meteor.call('commentInsert', comment, function(error, commentId) {
